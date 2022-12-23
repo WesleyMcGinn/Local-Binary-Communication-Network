@@ -9,7 +9,7 @@
       let socket = new WebSocket("ws://" + IP + ":81");
       function checkSocket() {
         if (socket.readyState > 1) {
-          socket = new Websocket("ws://" + IP + ":81");
+          socket = new WebSocket("ws://" + IP + ":81");
           console.log("Reconnecting to Websocket....");
           connecting = true;
         } else {
