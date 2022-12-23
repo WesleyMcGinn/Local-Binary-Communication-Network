@@ -57,13 +57,28 @@
         } else {
           if (connecting == true && socket.readyState == 1) {
             connecting = false;
+            setSocket();
             console.log("Connected sucessfully to WebSocket :)");
           }
         }
       }
-      window.setInterval("checkSocket", 500);
-      socket.onerror = function(error) {
-        alert("The communication system is currently experiencing an error:\n\n" + error.message);
+      window.setInterval("checkSocket()", 1000);
+      function setSocket() {
+        socket.onerror = function(error) {
+          alert("The communication system is currently experiencing an error:\n\n" + error.message);
+        }
+        socket.onmessage = function(message) {
+          var translate = "" + message.data;
+          if (translate == "ping") {} else {
+            if (translate.substring(0, 1) != "[") {
+              alert("Alert:\n" + translate);
+            } else {
+              binaryList = eval(translate);
+              updateBox();
+              document.getElementById("input").max = binaryList.length - 1;
+            }
+          }
+        }
       }
       function updateBox() {
         document.title = "Binary Network " + binaryList.join("");
@@ -74,21 +89,10 @@
           document.getElementById("button").style.backgroundColor = "lightgreen";
         }
       }
-      socket.onmessage = function(message) {
-        var translate = "" + message.data;
-        if (translate == "ping") {} else {
-          if (translate.substring(0, 1) != "[") {
-            alert("Alert:\n" + translate);
-          } else {
-            binaryList = eval(translate);
-            updateBox();
-            document.getElementById("input").max = binaryList.length - 1;
-          }
-        }
-      }
       function sendBit(bit) {
         socket.send((document.getElementById("input").value).toString() + bit.toString());
       }
+      setSocket();
     </script>
   </head>
   <body>
