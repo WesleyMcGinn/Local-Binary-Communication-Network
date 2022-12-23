@@ -8,7 +8,7 @@ var DATA = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var newData;
 
 http.createServer((req, res) => {
-  fs.readFile("C:/Users/admin/Desktop/Github Stuff/Extensions/Local-Binary-Sender/index.html", function (err, data) {
+  fs.readFile("C:/Users/admin/Desktop/Github Stuff/Local-Binary-Sender/index.html", function (err, data) {
     if (err) {
       console.log("404: HTML file does not exist!");
       res.writeHead(404, {'Content-Type': 'text/html'});
