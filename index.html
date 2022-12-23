@@ -66,6 +66,7 @@
         alert("The communication system is currently experiencing an error:\n\n" + error.message);
       }
       function updateBox() {
+        document.title = "Binary Network " + binaryList.join("");
         document.getElementById("button").innerHTML = (binaryList[document.getElementById("input").value]).toString();
         if (binaryList[document.getElementById("input").value] == 0) {
           document.getElementById("button").style.backgroundColor = "#08afaf";
