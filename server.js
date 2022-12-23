@@ -42,7 +42,7 @@ function onSocketConnect(ws) {
         var bin = parseInt(newData.substring(newData.length-1, newData.length));
         var box = parseInt(newData.substring(0, newData.length-1));
         if (box < 0 || box > DATA.length - 1) {
-          ws.send("Error: You must pick a number between 0 and " + (DATA.length).toString() + ".");
+          ws.send("Error: You must pick a number between 0 and " + (DATA.length-1).toString() + ".");
         } else {
           DATA[box] = bin;
           for(let client of clients) {
