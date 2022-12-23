@@ -32,7 +32,7 @@ function onSocketConnect(ws) {
   ws.send(JSON.stringify(DATA));
 
   ws.on('message', function(message) {
-    newData = "" + message;
+    newData = "" + message.toString();
     if (newData == "ping") {
       ws.send("ping");
     } else {
