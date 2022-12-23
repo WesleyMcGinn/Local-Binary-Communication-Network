@@ -4,7 +4,7 @@ const ws = require('ws');
 const wss = new ws.Server({noServer: true});
 const clients = new Set();
 
-var DATA = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var DATA = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var newData;
 
 http.createServer((req, res) => {
