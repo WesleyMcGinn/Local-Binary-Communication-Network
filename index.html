@@ -24,15 +24,11 @@
         alert("The communication system is currently experiencing an error:\n\n" + error.message);
       }
       function updateBox() {
-        for (i = 0; i < binaryList.length; i++) {
-          if (i == document.getElementById("box").value) {
-            document.getElementById("button").innerHTML = toString(binaryList[i]);
-            if (binaryList[i] == 0) {
-              document.getElementById("button").style.backgroundColor = "lightsalmon";
-            } else {
-              document.getElementById("button").style.backgroundColor = "lightgreen";
-            }
-          }
+        document.getElementById("button").innerHTML = (binaryList[document.getElementById("input").value]).toString();
+        if (binaryList[document.getElementById("input").value] == 0) {
+          document.getElementById("button").style.backgroundColor = "#08afaf";
+        } else {
+          document.getElementById("button").style.backgroundColor = "lightgreen";
         }
       }
       socket.onmessage = function(message) {
