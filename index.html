@@ -43,6 +43,9 @@
           }
         }
       }
+      function sendBit(bit) {
+        socket.send((document.getElementById("input").value).toString() + bit.toString());
+      }
     </script>
   </head>
   <body>
