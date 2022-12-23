@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>BINARY SENDER</title>
+    <style></style>
+    <script>
+      var IP = "192.168.1.100";
+      var connecting = false;
+      var binaryList;
+      let socket = new WebSocket("ws://" + IP + ":81");
+      function checkSocket() {
+        if (socket.readyState > 1) {
+          socket = new Websocket("ws://" + IP + ":81");
+          console.log("Reconnecting to Websocket....");
+          connecting = true;
+        } else {
+          if (connecting == true && socket.readyState == 1) {
+            connecting = false;
+            console.log("Connected sucessfully to WebSocket :)");
+          }
+        }
+      }
+      window.setInterval("checkSocket", 500);
+      socket.onerror = function(error) {
+        alert("The communication system is currently experiencing an error:\n\n" + error.message);
+      }
+      function updateBox() {
+        for (i = 0; i < binaryList.length; i++) {
+          if (i == document.getElementById("box").value) {
+            document.getElementById("button").innerHTML = toString(binaryList[i]);
+            if (binaryList[i] == 0) {
+              document.getElementById("button").style.backgroundColor = "lightsalmon";
+            } else {
+              document.getElementById("button").style.backgroundColor = "lightgreen";
+            }
+          }
+        }
+      }
+      socket.onmessage = function(message) {
+        var translate = "" + message.data;
+        if (translate == "ping") {} else {
+          if (translate.substring(0, 1) != "[") {
+            alert("Alert:\n" + translate);
+          } else {
+            binaryList = eval(translate);
+            updateBox();
+            document.getElementById("input").max = toString(binaryList.length);
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <input type="number" id="input" min="0" max="0">
+    <button id="button">0</button>
+  </body>
+</html>
+
+    
